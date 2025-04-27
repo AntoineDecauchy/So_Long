@@ -36,11 +36,11 @@ int main(void)
 	if (!mlx)
 		return EXIT_FAILURE;
 	win = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "So_Long");
-    if (!win)
-        return EXIT_FAILURE;
+	if (!win)
+		return 1;
 
 	// Dessin d'un damier noir/blanc 1 pixel logique = SCALE² pixels réels
-	for (int ly = 0; ly < GBA_HEIGHT; ly++)
+	for (int ly = 0; ly < GBA_HEIGHT; ly++){
 		for (int lx = 0; lx < GBA_WIDTH; lx++) {
 			int color = ((lx + ly) & 1) ? 0x00FFFFFF : 0x00000000;
 			for (int dy = 0; dy < SCALE; dy++)
@@ -50,6 +50,7 @@ int main(void)
 								  ly * SCALE + dy,
 								  color);
 		}
+	}
     // Hook pour la touche ESC
     mlx_key_hook(win, key_hook, NULL);
 
