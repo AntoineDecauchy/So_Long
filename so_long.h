@@ -18,6 +18,7 @@
 # endif
 
 # include "mlx.h"
+# include "./keybind/key.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stddef.h>
