@@ -25,11 +25,23 @@
 # include <fcntl.h>
 # include <math.h>
 
+typedef struct parse
+{
+	char	zero;
+	char	one;
+	char	collectible;
+	char	exit;
+	char	start;
+	char	intruder;
+	int		size;
+}			t_parse;
+
 /*-----get_next_line-----*/
 
 size_t	checkn(char *src);
 char	*end(char **tmp, char **buffer);
 char	*get_next_line(int fd);
+void	putstr(char *str);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t lendst);
 char	*ft_strndup(const char *src, size_t n);
