@@ -26,17 +26,6 @@
 # include <fcntl.h>
 # include <math.h>
 
-typedef struct parse
-{
-	char	zero;
-	char	one;
-	char	collectible;
-	char	exit;
-	char	start;
-	char	intruder;
-	int		size;
-}			t_parse;
-
 /*-----get_next_line-----*/
 
 size_t	checkn(char *src);
