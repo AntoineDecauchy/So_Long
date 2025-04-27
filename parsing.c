@@ -46,7 +46,10 @@ char	**create_map(char *file_name)
 	return (map);
 }
 
-//void	map_parsing(char **map)
+void	map_parsing(char **map)
+{
+	t_parse	parse = {0};
+}
 
 int main(void)
 {
