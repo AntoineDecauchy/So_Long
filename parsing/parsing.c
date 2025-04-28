@@ -93,10 +93,8 @@ char	**create_parse_map(char *file_name)
 	t_parse	parse;
 
 	parse = init_parse(parse);
-	printf("%i\n", parse.intruder);
 	map = create_map(file_name, &parse);
 	first_parse(map, &parse);
-	printf("%i\n", parse.intruder);
 	check_parse(parse, map);
 	return (map);
 }
