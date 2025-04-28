@@ -39,6 +39,7 @@ t_parse	init_parse(t_parse parse)
 	parse.intruder = 0;
 	parse.size_line = 0;
 	parse.number_line = 0;
+	return (parse);
 }
 
 void	free_map(char **map)
