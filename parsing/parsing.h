@@ -21,7 +21,13 @@ typedef struct parse
 	char	exit;
 	char	start;
 	char	intruder;
-	int		size;
+	int		size_line;
+	int		number_line;
 }			t_parse;
+
+t_parse	init_parse(t_parse parse);
+int		number_line(char *file_name);
+void	free_map(char **map);
+void	exit_parse(char *error_message, char **map);
 
 #endif

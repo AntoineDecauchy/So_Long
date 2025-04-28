@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 128
 # endif
 
-# include "mlx.h"
+//# include "mlx.h"
 # include "./keybind/key.h"
 # include <stdio.h>
 # include <unistd.h>

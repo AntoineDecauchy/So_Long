@@ -13,31 +13,20 @@
 #include "../so_long.h"
 #include "parsing.h"
 
-int	number_line(char *file_name)
-{
-	int	i;
-	int fd;
 
-	i = 0;
-	fd = open(file_name, O_RDONLY);
-	while (get_next_line(fd))
-		i++;
-	close(fd);
-	return (i);
-}
-
-char	**create_map(char *file_name)
+char	**create_map(char *file_name, t_parse *parse)
 {
 	int		fd;
-	int		nl;
 	int		i;
 	char	**map;
 
+	parse->number_line = number_line(file_name);
+	if (parse->number_line < 4)
+		exit_parse("Error Map : Insufficient number of lines\n", NULL);
 	i = 0;
 	fd = open(file_name, O_RDONLY);
-	nl = number_line(file_name);
-	map = malloc((nl + 1) * sizeof(char *));
-	while (i < nl)
+	map = malloc((parse->number_line + 1) * sizeof(char *));
+	while (i < parse->number_line)
 	{
 		map[i] = get_next_line(fd);
 		i++;
@@ -47,19 +36,72 @@ char	**create_map(char *file_name)
 	return (map);
 }
 
-void	map_parsing(char **map)
+void	first_parse(char **map, t_parse *parse)
 {
-	t_parse	parse = {0};
+	char	*line;
+	char	**row;
+
+	row = map;
+	while(*row)
+	{
+		line = *row;
+		while (*line)
+		{
+			if (*line == '0')
+				parse->zero++;
+			else if (*line == '1')
+				parse->one++;
+			else if (*line == 'C')
+				parse->collectible++;
+			else if (*line == 'E')
+				parse->exit++;
+			else if (*line == 'P')
+				parse->start++;
+			else if (*line != '\n');
+				parse->intruder++;
+			line++;
+		}
+		row++;
+	}
+}
+
+void	check_parse(t_parse parse, char **map)
+{
+	if (parse.intruder != 0)
+		exit_parse("Error Map : Intruder detected\n", map);
+	if (parse.zero == 0)
+		exit_parse("Error Map : no 0\n", map);
+	if (parse.one == 0)
+		exit_parse("Error Map : no 1\n", map);
+	if (parse.collectible == 0)
+		exit_parse("Error Map : no collectible\n", map);
+	if (parse.exit != 1)
+		exit_parse("Error Map : no or more than one exit\n", map);
+	if (parse.start == 0)
+		exit_parse("Error Map : no or more than one start\n", map);
+}
+
+char	**create_parse_map(char *file_name)
+{
+	char	**map;
+	t_parse	parse;
+
+	parse = init_parse(parse);
+	map = create_map(file_name, &parse);
+	check_parse(parse, map);
+	return (map);
 }
 
 int main(void)
 {
-	char **map = create_map("test.txt");
+	char **map = create_parse_map("../test.txt");
 	int i = 0;
 	while(map[i])
 	{
 		printf("%s", map[i]);
 		i++;
 	}
+	printf("%s", map[i]);
+	free_map(map);
 	return 0;
 }
