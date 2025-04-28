@@ -87,6 +87,24 @@ void	check_parse(t_parse parse, char **map)
 		exit_parse("Error Map : no or more than one start\n", map);
 }
 
+void	second_parse(char **map, t_parse *parse)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	parse->size_line = check_only_one(map[i], map);
+	i++;
+	while (i < (parse->number_line - 1))
+	{
+		if (check_one_border(map[i], map) != parse->size_line)
+			exit_parse("Error Map : map is not a rectangle\n", map);
+		i++;
+	}
+	if (check_only_one(map[i], map) != parse->size_line)
+		exit_parse("Error Map : map is not a rectangle\n", map);
+}
+
 char	**create_parse_map(char *file_name)
 {
 	char	**map;
@@ -96,6 +114,8 @@ char	**create_parse_map(char *file_name)
 	map = create_map(file_name, &parse);
 	first_parse(map, &parse);
 	check_parse(parse, map);
+	second_parse(map, &parse);
+	printf("map ok \n");
 	return (map);
 }
 

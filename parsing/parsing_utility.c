@@ -58,3 +58,28 @@ void	exit_parse(char *error_message, char **map)
 	putstr(error_message);
 	exit(EXIT_FAILURE);
 }
+int	check_only_one(char *str, char **map)
+{
+	int	i;
+	int len;
+
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len - 1)
+	{
+		if (str[i] != '1')
+			exit_parse("Error Map : Border fail\n", map);
+		i++;
+	}
+	return (len);
+}
+
+int	check_one_border(char *str, char **map)
+{
+	int len;
+
+	len = ft_strlen(str);
+	if (str[0] != '1' || str[len - 2] != '1')
+		exit_parse("Error Map : Border fail\n", map);
+	return (len);
+}
