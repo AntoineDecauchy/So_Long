@@ -15,13 +15,17 @@
 
 int	number_line(char *file_name)
 {
-	int	i;
-	int fd;
+	int		i;
+	int 	fd;
+	char	*line;
 
 	i = 0;
 	fd = open(file_name, O_RDONLY);
-	while (get_next_line(fd))
+	while (line = get_next_line(fd))
+	{
+		free(line);
 		i++;
+	}
 	close(fd);
 	return (i);
 }
