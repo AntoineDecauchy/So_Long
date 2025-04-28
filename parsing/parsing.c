@@ -18,6 +18,7 @@ char	**create_map(char *file_name, t_parse *parse)
 {
 	int		fd;
 	int		i;
+	char	*free_gnl;
 	char	**map;
 
 	parse->number_line = number_line(file_name);
@@ -35,6 +36,8 @@ char	**create_map(char *file_name, t_parse *parse)
 		i++;
 	}
 	map[i] = NULL;
+	free_gnl = get_next_line(fd);
+	free(free_gnl);
 	close(fd);
 	return (map);
 }
