@@ -90,7 +90,6 @@ void	check_parse(t_parse parse, char **map)
 void	second_parse(char **map, t_parse *parse)
 {
 	int		i;
-	char	*line;
 
 	i = 0;
 	parse->size_line = check_only_one(map[i], map);
@@ -110,7 +109,7 @@ char	**create_parse_map(char *file_name)
 	char	**map;
 	t_parse	parse;
 
-	parse = init_parse(parse);
+	init_parse(&parse);
 	map = create_map(file_name, &parse);
 	first_parse(map, &parse);
 	check_parse(parse, map);

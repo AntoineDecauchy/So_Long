@@ -21,7 +21,7 @@ int	number_line(char *file_name)
 
 	i = 0;
 	fd = open(file_name, O_RDONLY);
-	while (line = get_next_line(fd))
+	while ((line = get_next_line(fd)))
 	{
 		free(line);
 		i++;
@@ -29,17 +29,16 @@ int	number_line(char *file_name)
 	close(fd);
 	return (i);
 }
-t_parse	init_parse(t_parse parse)
+void	init_parse(t_parse *parse)
 {
-	parse.zero = 0;
-	parse.one = 0;
-	parse.collectible = 0;
-	parse.exit = 0;
-	parse.start = 0;
-	parse.intruder = 0;
-	parse.size_line = 0;
-	parse.number_line = 0;
-	return (parse);
+	parse->zero = 0;
+	parse->one = 0;
+	parse->collectible = 0;
+	parse->exit = 0;
+	parse->start = 0;
+	parse->intruder = 0;
+	parse->size_line = 0;
+	parse->number_line = 0;
 }
 
 void	free_map(char **map)
