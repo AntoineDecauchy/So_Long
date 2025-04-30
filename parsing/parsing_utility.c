@@ -82,3 +82,11 @@ int	check_one_border(char *str, char **map)
 		exit_parse("Error Map : Border fail\n", map);
 	return (len);
 }
+void	check_size_map(t_parse parse, char **map)
+{
+	printf("%i %i\n", parse.number_line, parse.size_line);
+	if (parse.number_line > 20 || parse.size_line > 20)
+		exit_parse("Error map : To Big\n", map);
+	if (parse.number_line < 4 || parse.size_line < 4)
+		exit_parse("Error map : To Short\n", map);
+}

@@ -27,6 +27,7 @@ typedef struct parse
 
 void	init_parse(t_parse *parse);
 int		number_line(char *file_name);
+void	check_size_map(t_parse parse, char **map);
 int		check_only_one(char *str, char **map);
 int		check_one_border(char *str, char **map);
 void	free_map(char **map);

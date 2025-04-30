@@ -21,13 +21,8 @@ char	**create_map(char *file_name, t_parse *parse)
 	char	*free_gnl;
 	char	**map;
 
-	parse->number_line = number_line(file_name);
-	if (parse->number_line < 3)
-	{
-		putstr("Error Map : Insufficient number of lines\n");
-		exit(EXIT_FAILURE);
-	}
 	i = 0;
+	parse->number_line = number_line(file_name);
 	fd = open(file_name, O_RDONLY);
 	map = malloc((parse->number_line + 1) * sizeof(char *));
 	while (i < parse->number_line)
@@ -39,6 +34,7 @@ char	**create_map(char *file_name, t_parse *parse)
 	free_gnl = get_next_line(fd);
 	free(free_gnl);
 	close(fd);
+	parse->size_line = ft_strlen(map[0]);
 	return (map);
 }
 
@@ -111,6 +107,7 @@ char	**create_parse_map(char *file_name)
 
 	init_parse(&parse);
 	map = create_map(file_name, &parse);
+	check_size_map(parse, map);
 	first_parse(map, &parse);
 	check_parse(parse, map);
 	second_parse(map, &parse);
