@@ -24,6 +24,8 @@ char	**create_map(char *file_name, t_parse *parse)
 	parse->number_line = number_line(file_name);
 	fd = open(file_name, O_RDONLY);
 	map = malloc((parse->number_line + 1) * sizeof(char *));
+	if (!map)
+		return (NULL);
 	while (i < parse->number_line)
 	{
 		map[i] = get_next_line(fd);
@@ -86,6 +88,7 @@ void	second_parse(char **map, t_parse *parse)
 char	**create_parse_map(char *file_name)
 {
 	char	**map;
+	char	**map_copy;
 	t_parse	parse;
 
 	init_parse(&parse);
@@ -94,6 +97,10 @@ char	**create_parse_map(char *file_name)
 	first_parse(map, &parse);
 	check_parse(parse, map);
 	second_parse(map, &parse);
+	printf("balise\n");
+	map_copy = copy_map(map, parse.number_line);
+	flood_fill(map_copy, parse);
+	free_map(map_copy);
 	printf("map ok \n");
 	return (map);
 }
@@ -103,6 +110,12 @@ int	main(void)
 	char	**map;
 
 	map = create_parse_map("../test.txt");
+	int i = 0;
+	while (map[i])
+	{
+		printf("%s", map[i]);
+		i++;
+	}
 	free_map(map);
 	return (0);
 }

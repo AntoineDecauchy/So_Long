@@ -31,7 +31,8 @@ void	check_size_map(t_parse parse, char **map);
 int		check_only_one(char *str, char **map);
 int		check_one_border(char *str, char **map);
 void	check_parse(t_parse parse, char **map);
-void	free_map(char **map);
+char	**copy_map(char **map, int size);
 void	exit_parse(char *error_message, char **map);
+void	flood_fill(char **map, t_parse parse);
 
 #endif

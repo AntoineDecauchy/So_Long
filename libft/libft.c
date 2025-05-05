@@ -78,3 +78,13 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	free((char *)s1);
 	return (str);
 }
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
+}

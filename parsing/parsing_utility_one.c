@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utility.c                                  :+:      :+:    :+:   */
+/*   parsing_utility_one.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adecauch <adecauch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:12:42 by adecauch          #+#    #+#             */
-/*   Updated: 2025/04/28 22:12:43 by adecauch         ###   ########.fr       */
+/*   Updated: 2025/05/05 07:01:18 by adecauch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,6 @@ void	init_parse(t_parse *parse)
 	parse->number_line = 0;
 }
 
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		free(map[i++]);
-	free(map);
-}
-
 void	exit_parse(char *error_message, char **map)
 {
 	free_map(map);
@@ -61,18 +51,20 @@ void	exit_parse(char *error_message, char **map)
 	exit(EXIT_FAILURE);
 }
 
-int	check_only_one(char *str, char **map)
+char	**copy_map(char **map, int size)
 {
-	int	i;
-	int	len;
+	char	**copy;
+	int		i;
 
 	i = 0;
-	len = ft_strlen(str);
-	while (i < len - 1)
+	copy = malloc(sizeof(char *) * (size + 1));
+	if (!copy)
+		return (NULL);
+	while (map[i])
 	{
-		if (str[i] != '1')
-			exit_parse("Error Map : Border fail\n", map);
+		copy[i] = ft_strndup(map[i], ft_strlen(map[i]));
 		i++;
 	}
-	return (len);
+	copy[i] = NULL;
+	return (copy);
 }

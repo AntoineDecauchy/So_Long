@@ -34,5 +34,6 @@ size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t lendst);
 char	*ft_strndup(const char *src, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
+void	free_map(char **map);
 
 #endif

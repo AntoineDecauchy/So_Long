@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utility.c                                  :+:      :+:    :+:   */
+/*   parsing_utility_two.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adecauch <adecauch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:12:42 by adecauch          #+#    #+#             */
-/*   Updated: 2025/04/28 22:12:43 by adecauch         ###   ########.fr       */
+/*   Updated: 2025/05/05 07:01:32 by adecauch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,20 @@ void	check_parse(t_parse parse, char **map)
 		exit_parse("Error Map : no or more than one exit\n", map);
 	if (parse.start == 0)
 		exit_parse("Error Map : no or more than one start\n", map);
+}
+
+int	check_only_one(char *str, char **map)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len - 1)
+	{
+		if (str[i] != '1')
+			exit_parse("Error Map : Border fail\n", map);
+		i++;
+	}
+	return (len);
 }
