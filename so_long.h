@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 128
 # endif
 
-# include "mlx.h"
+//# include "mlx.h"
 # include "./keybind/key.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -26,10 +26,8 @@
 # include <fcntl.h>
 # include <math.h>
 
-/*-----get_next_line-----*/
+/*-----libft-----*/
 
-size_t	checkn(char *src);
-char	*end(char **tmp, char **buffer);
 char	*get_next_line(int fd);
 void	putstr(char *str);
 size_t	ft_strlen(const char *str);

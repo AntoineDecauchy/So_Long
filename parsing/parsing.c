@@ -13,7 +13,6 @@
 #include "../so_long.h"
 #include "parsing.h"
 
-
 char	**create_map(char *file_name, t_parse *parse)
 {
 	int		fd;
@@ -40,47 +39,31 @@ char	**create_map(char *file_name, t_parse *parse)
 
 void	first_parse(char **map, t_parse *parse)
 {
-	char	*line;
-	char	**row;
+	int	i;
+	int	j;
 
-	row = map;
-	while(*row)
+	i = 0;
+	while (map[i])
 	{
-		line = *row;
-		while (*line)
+		j = 0;
+		while (map[i][j])
 		{
-			if (*line == '0')
-				parse->zero++;
-			else if (*line == '1')
-				parse->one++;
-			else if (*line == 'C')
+			if (map[i][j] == 'C')
 				parse->collectible++;
-			else if (*line == 'E')
+			else if (map[i][j] == 'E')
 				parse->exit++;
-			else if (*line == 'P')
+			else if (map[i][j] == 'P')
+			{
 				parse->start++;
-			else if (*line != '\n')
+				parse->start_x = j;
+				parse->start_y = i;
+			}
+			else if (map[i][j] != '\n' && map[i][j] != '0' && map [i][j] != '1')
 				parse->intruder++;
-			line++;
+			j++;
 		}
-		row++;
+		i++;
 	}
-}
-
-void	check_parse(t_parse parse, char **map)
-{
-	if (parse.intruder != 0)
-		exit_parse("Error Map : Intruder detected\n", map);
-	if (parse.zero == 0)
-		exit_parse("Error Map : no 0\n", map);
-	if (parse.one == 0)
-		exit_parse("Error Map : no 1\n", map);
-	if (parse.collectible == 0)
-		exit_parse("Error Map : no collectible\n", map);
-	if (parse.exit != 1)
-		exit_parse("Error Map : no or more than one exit\n", map);
-	if (parse.start == 0)
-		exit_parse("Error Map : no or more than one start\n", map);
 }
 
 void	second_parse(char **map, t_parse *parse)
@@ -115,9 +98,11 @@ char	**create_parse_map(char *file_name)
 	return (map);
 }
 
-int main(void)
+int	main(void)
 {
-	char **map = create_parse_map("../test.txt");
+	char	**map;
+
+	map = create_parse_map("../test.txt");
 	free_map(map);
-	return 0;
+	return (0);
 }

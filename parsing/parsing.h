@@ -15,12 +15,12 @@
 
 typedef struct parse
 {
-	char	zero;
-	char	one;
 	char	collectible;
 	char	exit;
 	char	start;
 	char	intruder;
+	int		start_x;
+	int		start_y;
 	int		size_line;
 	int		number_line;
 }			t_parse;
@@ -30,6 +30,7 @@ int		number_line(char *file_name);
 void	check_size_map(t_parse parse, char **map);
 int		check_only_one(char *str, char **map);
 int		check_one_border(char *str, char **map);
+void	check_parse(t_parse parse, char **map);
 void	free_map(char **map);
 void	exit_parse(char *error_message, char **map);
 

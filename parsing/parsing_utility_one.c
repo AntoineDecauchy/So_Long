@@ -16,27 +16,30 @@
 int	number_line(char *file_name)
 {
 	int		i;
-	int 	fd;
+	int		fd;
 	char	*line;
 
 	i = 0;
 	fd = open(file_name, O_RDONLY);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		free(line);
 		i++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (i);
 }
+
 void	init_parse(t_parse *parse)
 {
-	parse->zero = 0;
-	parse->one = 0;
 	parse->collectible = 0;
 	parse->exit = 0;
 	parse->start = 0;
 	parse->intruder = 0;
+	parse->start_x = 0;
+	parse->start_y = 0;
 	parse->size_line = 0;
 	parse->number_line = 0;
 }
@@ -57,10 +60,11 @@ void	exit_parse(char *error_message, char **map)
 	putstr(error_message);
 	exit(EXIT_FAILURE);
 }
+
 int	check_only_one(char *str, char **map)
 {
 	int	i;
-	int len;
+	int	len;
 
 	i = 0;
 	len = ft_strlen(str);
@@ -71,22 +75,4 @@ int	check_only_one(char *str, char **map)
 		i++;
 	}
 	return (len);
-}
-
-int	check_one_border(char *str, char **map)
-{
-	int len;
-
-	len = ft_strlen(str);
-	if (str[0] != '1' || str[len - 2] != '1')
-		exit_parse("Error Map : Border fail\n", map);
-	return (len);
-}
-void	check_size_map(t_parse parse, char **map)
-{
-	printf("%i %i\n", parse.number_line, parse.size_line);
-	if (parse.number_line > 20 || parse.size_line > 20)
-		exit_parse("Error map : To Big\n", map);
-	if (parse.number_line < 4 || parse.size_line < 4)
-		exit_parse("Error map : To Short\n", map);
 }
