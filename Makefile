@@ -23,7 +23,10 @@ else
     LIBS    = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 endif
 INC = -I$(MLX_DIR)
-SRC = so_long.c
+SRC = so_long.c\
+    ./parsing/parsing.c ./parsing/flood_fill.c\
+    ./parsing/parsing_utility_one.c ./parsing/parsing_utility_two.c\
+    ./libft/get_next_line.c ./libft/libft.c
 OBJ = $(SRC:.c=.o)
 all: $(NAME)
 $(NAME): $(OBJ)

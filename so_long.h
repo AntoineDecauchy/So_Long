@@ -36,4 +36,6 @@ char	*ft_strndup(const char *src, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
 void	free_map(char **map);
 
+char	**create_parse_map(char *file_name);
+
 #endif
