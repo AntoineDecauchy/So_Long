@@ -97,25 +97,12 @@ char	**create_parse_map(char *file_name)
 	first_parse(map, &parse);
 	check_parse(parse, map);
 	second_parse(map, &parse);
-	printf("balise\n");
 	map_copy = copy_map(map, parse.number_line);
-	flood_fill(map_copy, parse);
-	free_map(map_copy);
-	printf("map ok \n");
-	return (map);
-}
-
-int	main(void)
-{
-	char	**map;
-
-	map = create_parse_map("../test.txt");
-	int i = 0;
-	while (map[i])
+	if (flood_fill(map_copy, parse))
 	{
-		printf("%s", map[i]);
-		i++;
+		free_map(map_copy);
+		exit_parse("Error Map : Unreachable element\n", map);
 	}
-	free_map(map);
-	return (0);
+	free_map(map_copy);
+	return (map);
 }
