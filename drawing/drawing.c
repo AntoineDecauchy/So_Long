@@ -47,10 +47,10 @@ void	load_image(void *mlx, t_image *image)
 	int	raf;
 
 	raf = 0;
-	image->wall = mlx_xpm_file_to_image(mlx, "../xpm/wall.xpm", &raf, &raf);
-	image->floor = mlx_xpm_file_to_image(mlx, "../xpm/floor.xpm", &raf, &raf);
-	image->exit = mlx_xpm_file_to_image(mlx, "../xpm/exit.xpm", &raf, &raf);
-	image->collectible = mlx_xpm_file_to_image(mlx, "../xpm/collectible.xpm", &raf, &raf);
+	image->wall = mlx_xpm_file_to_image(mlx, "xpm/wall.xpm", &raf, &raf);
+	image->floor = mlx_xpm_file_to_image(mlx, "xpm/wall.xpm", &raf, &raf);
+	image->exit = mlx_xpm_file_to_image(mlx, "xpm/exit.xpm", &raf, &raf);
+	image->collectible = mlx_xpm_file_to_image(mlx, "xpm/collectible.xpm", &raf, &raf);
 }
 void	draw_map(void *mlx, void *win, char **map, t_image image)
 {
