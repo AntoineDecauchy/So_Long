@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 128
 # endif
 
-//# include "mlx.h"
+# include "mlx.h"
 # include "./keybind/key.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -37,5 +37,18 @@ char	*ft_strjoin(const char *s1, const char *s2);
 void	free_map(char **map);
 
 char	**create_parse_map(char *file_name);
+
+typedef struct image
+{
+	void	*wall;
+	void	*floor;
+	void	*exit;
+	void	*collectible;
+}			t_image;
+
+void	draw_square(void *mlx, void *win, int x, int y, int side, int color);
+void	load_image(void *mlx, t_image *image);
+void	draw_item(void *mlx, void *win, char c, int x, int y, t_image image);
+void	draw_map(void *mlx, void *win, char **map, t_image image);
 
 #endif

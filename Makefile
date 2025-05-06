@@ -26,7 +26,8 @@ INC = -I$(MLX_DIR)
 SRC = so_long.c\
     ./parsing/parsing.c ./parsing/flood_fill.c\
     ./parsing/parsing_utility_one.c ./parsing/parsing_utility_two.c\
-    ./libft/get_next_line.c ./libft/libft.c
+    ./libft/get_next_line.c ./libft/libft.c\
+    ./drawing/drawing.c
 OBJ = $(SRC:.c=.o)
 all: $(NAME)
 $(NAME): $(OBJ)
