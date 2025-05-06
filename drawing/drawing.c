@@ -65,7 +65,7 @@ void	draw_map(void *mlx, void *win, char **map, t_image image)
 	while (map[i])
 	{
 		j = 0;
-		while (map[i][j] != '\n')
+		while (map[i][j] && map[i][j] != '\n')
 		{
 			draw_item(mlx, win, map[i][j], x, y, image);
 			j++;
