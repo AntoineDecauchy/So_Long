@@ -21,6 +21,11 @@ int	number_line(char *file_name)
 
 	i = 0;
 	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+	{
+		putstr("Error Map : Could not open map file.\n");
+		exit(EXIT_FAILURE);
+	}
 	line = get_next_line(fd);
 	while (line)
 	{

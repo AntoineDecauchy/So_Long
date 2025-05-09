@@ -92,7 +92,10 @@ char	**create_parse_map(char *file_name)
 	t_parse	parse;
 
 	init_parse(&parse);
-	map = create_map(file_name, &parse);
+	if (!file_name)
+		map = create_map("default_map.ber", &parse);
+	else
+		map = create_map(file_name, &parse);
 	check_size_map(parse, map);
 	first_parse(map, &parse);
 	check_parse(parse, map);
