@@ -32,8 +32,13 @@ void	draw_square(void *mlx, void *win, int x, int y, int side, int color)
 
 void	draw_item(void *mlx, void *win, char c, int x, int y, t_image image)
 {
-	if (c == '1' || c == 'P')
+	if (c == '1')
 		mlx_put_image_to_window(mlx, win, image.wall, x, y);
+	else if (c == 'P')
+	{
+		mlx_put_image_to_window(mlx, win, image.floor, x, y);
+		mlx_put_image_to_window(mlx, win, image.cartman, x, y);
+	}
 	else if (c == '0')
 		mlx_put_image_to_window(mlx, win, image.floor, x, y);
 	else if (c == 'C')

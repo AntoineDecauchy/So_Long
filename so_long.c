@@ -18,12 +18,13 @@ int	main(int argc, char **argv)
 	void	*win;
 	char	**map;
 	t_image	image;
+	t_map	map_size;
 
 	(void)argc;
-	map = create_parse_map(argv[1]);
+	map = create_parse_map(argv[1], &map_size.x_size, &map_size.y_size);
 	mlx = mlx_init();
 	load_image(mlx, &image);
-	win = mlx_new_window(mlx, 400, 400, "test");
+	win = mlx_new_window(mlx, map_size.x_size * 64, map_size.y_size * 64, "test");
 	draw_map(mlx, win, map, image);
 	mlx_loop(mlx);
 	free_map(map);

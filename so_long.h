@@ -36,7 +36,7 @@ char	*ft_strndup(const char *src, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
 void	free_map(char **map);
 
-char	**create_parse_map(char *file_name);
+char	**create_parse_map(char *file_name, int *x, int *y);
 
 typedef struct image
 {
@@ -46,6 +46,12 @@ typedef struct image
 	void	*collectible;
 	void	*cartman;
 }			t_image;
+
+typedef struct map
+{
+	int		x_size;
+	int		y_size;
+}			t_map;
 
 void	draw_square(void *mlx, void *win, int x, int y, int side, int color);
 void	load_image(void *mlx, t_image *image);
