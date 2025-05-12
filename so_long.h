@@ -62,7 +62,6 @@ typedef struct game
 	int		collectibles;
 }			t_game;
 
-void	draw_square(void *mlx, void *win, int x, int y, int side, int color);
 void	load_image(void *mlx, t_image *image);
 void	draw_item(void *mlx, void *win, char c, int x, int y, t_image image);
 void	draw_map(void *mlx, void *win, char **map, t_image image);
