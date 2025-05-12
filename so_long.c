@@ -12,17 +12,16 @@
 
 #include "so_long.h"
 
-void	init_game(t_game *game, char *map_file)
+void	init_game(t_game *g, char *map_file)
 {
-	game->map = create_parse_map(map_file, &game->x_size_map, &game->y_size_map);
-	game->mlx = mlx_init();
-	load_image(game->mlx, &game->image);
-	game->win = mlx_new_window(game->mlx, game->x_size_map * 64,
-		game->y_size_map * 64, "So Long!");
-	game->moves = 0;
-	game->collectibles = 0;
-	game->player_x = 0;
-	game->player_y = 0;
+	g->map = create_parse_map(map_file, &g->x_map, &g->y_map);
+	g->mlx = mlx_init();
+	load_image(g->mlx, &g->image);
+	g->win = mlx_new_window(g->mlx, g->x_map * 64, g->y_map * 64, "So Long");
+	g->moves = 0;
+	g->collectibles = 0;
+	g->player_x = 0;
+	g->player_y = 0;
 }
 
 void	find_player(t_game *game)

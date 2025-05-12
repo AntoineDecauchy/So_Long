@@ -54,8 +54,8 @@ typedef struct game
 	void	*win;
 	char	**map;
 	t_image	image;
-	int		x_size_map;
-	int		y_size_map;
+	int		x_map;
+	int		y_map;
 	int		player_x;
 	int		player_y;
 	int		moves;
