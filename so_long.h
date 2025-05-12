@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 128
 # endif
 
-# include "mlx.h"
+# include <mlx.h>
 # include "./keybind/key.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -47,11 +47,20 @@ typedef struct image
 	void	*cartman;
 }			t_image;
 
-typedef struct map
+
+typedef struct game
 {
-	int		x_size;
-	int		y_size;
-}			t_map;
+	void	*mlx;
+	void	*win;
+	char	**map;
+	t_image	image;
+	int		x_size_map;
+	int		y_size_map;
+	int		player_x;
+	int		player_y;
+	int		moves;
+	int		collectibles;
+}			t_game;
 
 void	draw_square(void *mlx, void *win, int x, int y, int side, int color);
 void	load_image(void *mlx, t_image *image);

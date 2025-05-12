@@ -12,20 +12,96 @@
 
 #include "so_long.h"
 
+void	init_game(t_game *game, char *map_file)
+{
+	game->map = create_parse_map(map_file, &game->x_size_map, &game->y_size_map);
+	game->mlx = mlx_init();
+	load_image(game->mlx, &game->image);
+	game->win = mlx_new_window(game->mlx, game->x_size_map * 64,
+		game->y_size_map * 64, "So Long!");
+	game->moves = 0;
+	game->collectibles = 0;
+	game->player_x = 0;
+	game->player_y = 0;
+}
+
+void	find_player(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == 'P')
+			{
+				game->player_x = j;
+				game->player_y = i;
+			}
+			if (game->map[i][j] == 'C')
+				game->collectibles++;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	move_player(t_game *game, int dx, int dy)
+{
+	int	new_x;
+	int	new_y;
+
+	new_x = game->player_x + dx;
+	new_y = game->player_y + dy;
+	if (game->map[new_y][new_x] == '1')
+		return ;
+	if (game->map[new_y][new_x] == 'C')
+		game->collectibles--;
+	if (game->map[new_y][new_x] == 'E' && game->collectibles == 0)
+	{
+		free_map(game->map);
+		mlx_destroy_window(game->mlx, game->win);
+		exit(0);
+	}
+	game->map[game->player_y][game->player_x] = '0';
+	game->map[new_y][new_x] = 'P';
+	game->player_x = new_x;
+	game->player_y = new_y;
+	game->moves++;
+	draw_map(game->mlx, game->win, game->map, game->image);
+}
+
+static int	handle_key(int keycode, t_game *game)
+{
+	if (keycode == KEY_ESC)
+	{
+		free_map(game->map);
+		mlx_destroy_window(game->mlx, game->win);
+		exit(0);
+	}
+	else if (keycode == KEY_W || keycode == KEY_UP)
+		move_player(game, 0, -1);
+	else if (keycode == KEY_S || keycode == KEY_DOWN)
+		move_player(game, 0, 1);
+	else if (keycode == KEY_A || keycode == KEY_LEFT)
+		move_player(game, -1, 0);
+	else if (keycode == KEY_D || keycode == KEY_RIGHT)
+		move_player(game, 1, 0);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*win;
-	char	**map;
-	t_image	image;
-	t_map	map_size;
+	t_game	game;
 
 	(void)argc;
-	map = create_parse_map(argv[1], &map_size.x_size, &map_size.y_size);
-	mlx = mlx_init();
-	load_image(mlx, &image);
-	win = mlx_new_window(mlx, map_size.x_size * 64, map_size.y_size * 64, "test");
-	draw_map(mlx, win, map, image);
-	mlx_loop(mlx);
-	free_map(map);
+	init_game(&game, argv[1]);
+	find_player(&game);
+	draw_map(game.mlx, game.win, game.map, game.image);
+	mlx_hook(game.win, 2, 1L<<0, handle_key, &game);
+	mlx_loop(game.mlx);
+	return (0);
 }
