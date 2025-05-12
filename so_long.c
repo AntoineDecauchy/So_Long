@@ -50,25 +50,25 @@ void	find_player(t_game *game)
 
 void	move_player(t_game *game, int dx, int dy)
 {
-	int	new_x;
-	int	new_y;
+	int	x;
+	int	y;
 
-	new_x = game->player_x + dx;
-	new_y = game->player_y + dy;
-	if (game->map[new_y][new_x] == '1')
+	x = game->player_x + dx;
+	y = game->player_y + dy;
+	if (game->map[y][x] == '1')
 		return ;
-	if (game->map[new_y][new_x] == 'C')
+	if (game->map[y][x] == 'C')
 		game->collectibles--;
-	if (game->map[new_y][new_x] == 'E' && game->collectibles == 0)
+	if (game->map[y][x] == 'E' && game->collectibles == 0)
 	{
 		free_map(game->map);
 		mlx_destroy_window(game->mlx, game->win);
 		exit(0);
 	}
 	game->map[game->player_y][game->player_x] = '0';
-	game->map[new_y][new_x] = 'P';
-	game->player_x = new_x;
-	game->player_y = new_y;
+	game->map[y][x] = 'P';
+	game->player_x = x;
+	game->player_y = y;
 	game->moves++;
 	draw_map(game->mlx, game->win, game->map, game->image);
 }
