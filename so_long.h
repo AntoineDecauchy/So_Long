@@ -44,6 +44,7 @@ typedef struct image
 	void	*floor;
 	void	*exit;
 	void	*collectible;
+	void	*cartman;
 }			t_image;
 
 void	draw_square(void *mlx, void *win, int x, int y, int side, int color);

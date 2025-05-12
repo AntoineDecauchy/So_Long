@@ -48,9 +48,10 @@ void	load_image(void *mlx, t_image *image)
 
 	raf = 0;
 	image->wall = mlx_xpm_file_to_image(mlx, "xpm/wall.xpm", &raf, &raf);
-	image->floor = mlx_xpm_file_to_image(mlx, "xpm/wall.xpm", &raf, &raf);
+	image->floor = mlx_xpm_file_to_image(mlx, "xpm/floor.xpm", &raf, &raf);
 	image->exit = mlx_xpm_file_to_image(mlx, "xpm/exit.xpm", &raf, &raf);
 	image->collectible = mlx_xpm_file_to_image(mlx, "xpm/collectible.xpm", &raf, &raf);
+	image->cartman = mlx_xpm_file_to_image(mlx, "xpm/cartman.xpm", &raf, &raf);
 }
 void	draw_map(void *mlx, void *win, char **map, t_image image)
 {
@@ -69,10 +70,10 @@ void	draw_map(void *mlx, void *win, char **map, t_image image)
 		{
 			draw_item(mlx, win, map[i][j], x, y, image);
 			j++;
-			x += 16;
+			x += 64;
 		}
 		x = 0;
-		y += 16;
+		y += 64;
 		i++;
 	}
 }
