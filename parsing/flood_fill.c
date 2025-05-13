@@ -17,7 +17,7 @@ void	flood_fill_rec(char **map, t_parse parse, int x, int y)
 {
 	if (x >= (parse.size_line - 2) || y >= (parse.number_line - 1))
 		return ;
-	if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'E')
+	if (map[y][x] == '1' || map[y][x] == 'V')
 		return ;
 	map[y][x] = 'V';
 	flood_fill_rec(map, parse, x + 1, y);
