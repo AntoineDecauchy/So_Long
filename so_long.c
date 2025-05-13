@@ -57,6 +57,8 @@ void	move_player(t_game *game, int dx, int dy)
 	y = game->player_y + dy;
 	if (game->map[y][x] == '1')
 		return ;
+	if (game->map[y][x] == 'E' && game->collectibles != 0)
+		return ;
 	if (game->map[y][x] == 'C')
 		game->collectibles--;
 	if (game->map[y][x] == 'E' && game->collectibles == 0)
