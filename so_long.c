@@ -70,10 +70,13 @@ void	move_player(t_game *game, int dx, int dy)
 	game->player_x = x;
 	game->player_y = y;
 	game->moves++;
+	putstr("Moves: ");
+	putstr(ft_itoa(game->moves));
+	putstr("\n");
 	draw_map(game->mlx, game->win, game->map, game->image);
 }
 
-static int	handle_key(int keycode, t_game *game)
+int	handle_key(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 	{

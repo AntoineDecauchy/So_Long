@@ -34,6 +34,7 @@ size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t lendst);
 char	*ft_strndup(const char *src, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_itoa(int n);
 void	free_map(char **map);
 
 char	**create_parse_map(char *file_name, int *x, int *y);
