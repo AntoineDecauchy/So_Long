@@ -12,26 +12,6 @@
 
 #include "../so_long.h"
 
-void	draw_item(void *mlx, void *win, char c, int x, int y, t_image image)
-{
-	if (c == '1')
-		mlx_put_image_to_window(mlx, win, image.wall, x, y);
-	else if (c == 'P')
-	{
-		mlx_put_image_to_window(mlx, win, image.floor, x, y);
-		mlx_put_image_to_window(mlx, win, image.cartman, x, y);
-	}
-	else if (c == '0')
-		mlx_put_image_to_window(mlx, win, image.floor, x, y);
-	else if (c == 'C')
-	{
-		mlx_put_image_to_window(mlx, win, image.floor, x, y);
-		mlx_put_image_to_window(mlx, win, image.collectible, x, y);
-	}
-	else if (c == 'E')
-		mlx_put_image_to_window(mlx, win, image.exit, x, y);
-}
-
 void	load_image(void *mlx, t_image *image)
 {
 	int	raf;
@@ -40,28 +20,28 @@ void	load_image(void *mlx, t_image *image)
 	image->wall = mlx_xpm_file_to_image(mlx, "xpm/wall.xpm", &raf, &raf);
 	image->floor = mlx_xpm_file_to_image(mlx, "xpm/floor.xpm", &raf, &raf);
 	image->exit = mlx_xpm_file_to_image(mlx, "xpm/exit1.xpm", &raf, &raf);
-	image->collectible = mlx_xpm_file_to_image(mlx, "xpm/burger.xpm", &raf, &raf);
+	image->exit2 = mlx_xpm_file_to_image(mlx, "xpm/exit2.xpm", &raf, &raf);
+	image->collect = mlx_xpm_file_to_image(mlx, "xpm/burger.xpm", &raf, &raf);
 	image->cartman = mlx_xpm_file_to_image(mlx, "xpm/cartman.xpm", &raf, &raf);
 }
+
 void	draw_map(void *mlx, void *win, char **map, t_image image)
 {
-	int	i;
-	int	j;
-	int	x;
-	int	y;
+	int		i;
+	int		x;
+	int		y;
+	t_draw	draw;
 
 	x = 0;
 	y = 0;
 	i = 0;
+	draw.mlx = mlx;
+	draw.win = win;
+	draw.image = image;
 	while (map[i])
 	{
-		j = 0;
-		while (map[i][j] && map[i][j] != '\n')
-		{
-			draw_item(mlx, win, map[i][j], x, y, image);
-			j++;
-			x += 64;
-		}
+		draw.y = y;
+		draw_line(&draw, map[i], &x);
 		x = 0;
 		y += 64;
 		i++;
