@@ -25,7 +25,7 @@ int	check_one_border(char *str, char **map)
 
 void	check_size_map(t_parse parse, char **map)
 {
-	if (parse.number_line > 20 || parse.size_line > 20)
+	if (parse.number_line > 16 || parse.size_line > 31)
 		exit_parse("Error map : To Big\n", map);
 	if (parse.number_line < 3 || parse.size_line < 5)
 		exit_parse("Error map : To Short\n", map);
