@@ -103,6 +103,7 @@ int	main(int argc, char **argv)
 	init_game(&game, argv[1]);
 	find_player(&game);
 	draw_map(game.mlx, game.win, game.map, game.image);
+	putstr("Moves: 0\n");
 	mlx_hook(game.win, 2, 1L<<0, handle_key, &game);
 	mlx_loop(game.mlx);
 	return (0);
