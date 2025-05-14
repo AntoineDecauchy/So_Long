@@ -12,7 +12,7 @@
 
 #include "../so_long.h"
 
-static void	draw_wall_floor(t_draw draw)
+void	draw_wall_floor(t_draw draw)
 {
 	if (draw.c == '1')
 		mlx_put_image_to_window(draw.mlx, draw.win, draw.image.wall,
@@ -22,7 +22,7 @@ static void	draw_wall_floor(t_draw draw)
 			draw.x, draw.y);
 }
 
-static void	draw_player_collect(t_draw draw)
+void	draw_player_collect(t_draw draw)
 {
 	if (draw.c == 'P')
 	{
@@ -40,7 +40,7 @@ static void	draw_player_collect(t_draw draw)
 	}
 }
 
-static void	draw_exit(t_draw draw)
+void	draw_exit(t_draw draw)
 {
 	if (draw.c == 'E')
 		mlx_put_image_to_window(draw.mlx, draw.win, draw.image.exit,
