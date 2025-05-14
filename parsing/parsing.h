@@ -33,6 +33,6 @@ int		check_one_border(char *str, char **map);
 void	check_parse(t_parse parse, char **map);
 char	**copy_map(char **map, int size);
 void	exit_parse(char *error_message, char **map);
-char	flood_fill(char **map, t_parse parse);
+char	flood_fill(char **map_one, char **map_two, t_parse parse);
 
 #endif

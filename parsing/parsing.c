@@ -85,10 +85,18 @@ void	second_parse(char **map, t_parse *parse)
 		exit_parse("Error Map : map is not a rectangle\n", map);
 }
 
+void	exit_all_map(char **map, char **cp_map_one, char **cp_map_two)
+{
+	free_map(cp_map_one);
+	free_map(cp_map_two);
+	exit_parse("Error Map : Unreachable element\n", map);
+}
+
 char	**create_parse_map(char *file_name, int *x, int *y)
 {
 	char	**map;
-	char	**map_copy;
+	char	**cp_map_one;
+	char	**cp_map_two;
 	t_parse	parse;
 
 	init_parse(&parse);
@@ -100,14 +108,13 @@ char	**create_parse_map(char *file_name, int *x, int *y)
 	first_parse(map, &parse);
 	check_parse(parse, map);
 	second_parse(map, &parse);
-	map_copy = copy_map(map, parse.number_line);
-	if (flood_fill(map_copy, parse))
-	{
-		free_map(map_copy);
-		exit_parse("Error Map : Unreachable element\n", map);
-	}
+	cp_map_one = copy_map(map, parse.number_line);
+	cp_map_two = copy_map(map, parse.number_line);
+	if (flood_fill(cp_map_one, cp_map_two, parse))
+		exit_all_map(map, cp_map_one, cp_map_two);
 	*x = parse.size_line - 1;
 	*y = parse.number_line;
-	free_map(map_copy);
+	free_map(cp_map_one);
+	free_map(cp_map_two);
 	return (map);
 }
