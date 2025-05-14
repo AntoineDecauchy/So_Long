@@ -39,7 +39,7 @@ void	check_parse(t_parse parse, char **map)
 		exit_parse("Error Map : no collectible\n", map);
 	if (parse.exit != 1)
 		exit_parse("Error Map : no or more than one exit\n", map);
-	if (parse.start == 0)
+	if (parse.start != 1)
 		exit_parse("Error Map : no or more than one start\n", map);
 }
 
