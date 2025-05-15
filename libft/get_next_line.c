@@ -12,7 +12,7 @@
 
 #include "../so_long.h"
 
-void	putstr(char *str)
+void	ft_putstr(char *str)
 {
 	while (*str)
 		write(1, str++, 1);

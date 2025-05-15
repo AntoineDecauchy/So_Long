@@ -65,7 +65,7 @@ typedef struct s_draw
 /*-----libft-----*/
 
 char	*get_next_line(int fd);
-void	putstr(char *str);
+void	ft_putstr(char *str);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t lendst);
 char	*ft_strndup(const char *src, size_t n);

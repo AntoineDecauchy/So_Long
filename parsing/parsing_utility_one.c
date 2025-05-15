@@ -23,10 +23,15 @@ int	number_line(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
-		putstr("Error Map : Could not open map file.\n");
+		ft_putstr("Error Map : Could not open map file.\n");
 		exit(EXIT_FAILURE);
 	}
 	line = get_next_line(fd);
+	if (!line)
+	{
+		ft_putstr("Error Map : Map empty.\n");
+		exit(EXIT_FAILURE);
+	}
 	while (line)
 	{
 		free(line);
@@ -52,7 +57,7 @@ void	init_parse(t_parse *parse)
 void	exit_parse(char *error_message, char **map)
 {
 	free_map(map);
-	putstr(error_message);
+	ft_putstr(error_message);
 	exit(EXIT_FAILURE);
 }
 
