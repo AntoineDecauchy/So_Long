@@ -82,6 +82,7 @@ void	handle_collect(t_game *game);
 void	handle_exit(t_game *game);
 void	move_player(t_game *game, int dx, int dy);
 int		handle_key(int keycode, t_game *game);
+int		handle_cross(t_game *game);
 
 /*-----parsing-----*/
 

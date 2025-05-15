@@ -22,6 +22,7 @@ void	init_game(t_game *g, char *map_file)
 	g->collects = 0;
 	g->player_x = 0;
 	g->player_y = 0;
+	mlx_hook(g->win, 17, 0, handle_cross, g);
 }
 
 void	change_exit_state(t_game *game)

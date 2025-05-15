@@ -54,3 +54,11 @@ int	handle_key(int keycode, t_game *game)
 		move_player(game, 1, 0);
 	return (0);
 }
+
+int	handle_cross(t_game *game)
+{
+	free_map(game->map);
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
+	return (0);
+}
