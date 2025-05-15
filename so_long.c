@@ -12,6 +12,16 @@
 
 #include "so_long.h"
 
+void	free_image(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->image.cartman);
+	mlx_destroy_image(game->mlx, game->image.collect);
+	mlx_destroy_image(game->mlx, game->image.exit2);
+	mlx_destroy_image(game->mlx, game->image.exit);
+	mlx_destroy_image(game->mlx, game->image.floor);
+	mlx_destroy_image(game->mlx, game->image.wall);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;

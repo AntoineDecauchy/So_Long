@@ -51,7 +51,7 @@ typedef struct game
 	int		moves;
 	int		collects;
 }			t_game;
-
+void	free_image(t_game *game);
 typedef struct s_draw
 {
 	void	*mlx;
@@ -79,7 +79,7 @@ void	init_game(t_game *g, char *map_file);
 void	find_player(t_game *game);
 void	change_exit_state(t_game *game);
 void	handle_collect(t_game *game);
-void	handle_exit(t_game *game);
+void	handle_exit(t_game *game, char c);
 void	move_player(t_game *game, int dx, int dy);
 int		handle_key(int keycode, t_game *game);
 int		handle_cross(t_game *game);

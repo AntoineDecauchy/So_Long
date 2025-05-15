@@ -12,45 +12,42 @@
 
 #include "../so_long.h"
 
-size_t	ft_intlen(int n)
+int	ft_intlen(long int n)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
 	if (n <= 0)
 		len++;
 	while (n != 0)
 	{
-		n /= 10;
 		len++;
+		n /= 10;
 	}
 	return (len);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(const int nbr)
 {
-	char	*str;
-	size_t	len;
-	long	nb;
+	static char	str[12];
+	int			len;
+	long int	n;
 
-	nb = n;
+	n = nbr;
 	len = ft_intlen(n);
-	str = malloc(len + 1);
-	if (str == NULL)
-		return (NULL);
-	str[len] = '\0';
-	if (nb < 0)
+	if (n == 0)
+		str[0] = '0';
+	else if (n < 0)
 	{
 		str[0] = '-';
-		nb *= -1;
+		n = -n;
 	}
-	if (nb == 0)
-		str[0] = '0';
-	while (nb != 0)
+	str[len] = '\0';
+	while (n)
 	{
 		len--;
-		str[len] = (nb % 10) + '0';
-		nb /= 10;
+		str[len] = (n % 10) + 48;
+		n /= 10;
 	}
 	return (str);
 }

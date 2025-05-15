@@ -39,11 +39,7 @@ void	find_player(t_game *game)
 int	handle_key(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
-	{
-		free_map(game->map);
-		mlx_destroy_window(game->mlx, game->win);
-		exit(0);
-	}
+		handle_exit(game, '1');
 	else if (keycode == KEY_W || keycode == KEY_UP)
 		move_player(game, 0, -1);
 	else if (keycode == KEY_S || keycode == KEY_DOWN)
@@ -57,8 +53,6 @@ int	handle_key(int keycode, t_game *game)
 
 int	handle_cross(t_game *game)
 {
-	free_map(game->map);
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
+	handle_exit(game, '1');
 	return (0);
 }

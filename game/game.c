@@ -51,12 +51,24 @@ void	handle_collect(t_game *game)
 		change_exit_state(game);
 }
 
-void	handle_exit(t_game *game)
+void	handle_exit(t_game *game, char c)
 {
-	if (game->collects == 0)
+	if (game->collects == 0 && c == '0')
 	{
 		free_map(game->map);
+		free_image(game);
 		mlx_destroy_window(game->mlx, game->win);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+		exit(0);
+	}
+	else if (c == '1' )
+	{
+		free_map(game->map);
+		free_image(game);
+		mlx_destroy_window(game->mlx, game->win);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
 		exit(0);
 	}
 }
@@ -74,7 +86,7 @@ void	move_player(t_game *game, int dx, int dy)
 		handle_collect(game);
 	if (game->map[y][x] == 'E' || game->map[y][x] == 'e')
 	{
-		handle_exit(game);
+		handle_exit(game, '0');
 		return ;
 	}
 	game->map[game->player_y][game->player_x] = '0';
